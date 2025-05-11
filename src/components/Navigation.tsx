@@ -26,7 +26,7 @@ export type RootStackParamList = {
   InformacaoConta: undefined;
   Main: undefined; 
   Home: undefined; 
-  Tarefa: { lembrete?: Lembrete }; 
+  Tarefa: undefined; 
 };
 
 const Stack = createStackNavigator<RootStackParamList>();
@@ -84,24 +84,6 @@ const Navigation = () => {
               borderBottomWidth: 0, 
             },
             headerTitle: 'Configuração',
-            headerTitleAlign: 'center',  
-            headerTitleStyle: {
-              fontSize: width * 0.05,
-              fontWeight: 'bold',
-            },
-          }} 
-        />
-        <Stack.Screen 
-          name="Tarefa" 
-          component={Tarefa} 
-          options={{
-            headerShown: true, 
-            headerStyle: {
-              elevation: 0, 
-              shadowOpacity: 0, 
-              borderBottomWidth: 0, 
-            },
-            headerTitle: 'Tarefa',
             headerTitleAlign: 'center',  
             headerTitleStyle: {
               fontSize: width * 0.05,

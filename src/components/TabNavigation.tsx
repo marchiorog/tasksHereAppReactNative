@@ -1,22 +1,25 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Dimensions } from 'react-native'; // <-- importa Dimensions aqui
 import Home from '../screens/Home';
 import Tarefa from '../screens/Tarefa';
 import Perfil from '../screens/Perfil';
 import { Ionicons } from '@expo/vector-icons';
 
 const Tab = createBottomTabNavigator();
-const { width } = Dimensions.get('window'); // <-- pega a largura da tela
-const tabWidth = 250;
 
 const TabNavigation = () => {
   return (
-    <Tab.Navigator
-      screenOptions={{
-        headerShown: false,
-      }}
-    >
+      <Tab.Navigator
+        screenOptions={{
+          headerShown: false,
+          tabBarStyle: {
+            borderTopWidth: 0,        
+          },
+          tabBarActiveTintColor: '#68BAE8',
+          tabBarInactiveTintColor: '#e0e0e0',
+          tabBarShowLabel: false,  
+        }}
+      >
       <Tab.Screen
         name="Home"
         component={Home}
@@ -31,7 +34,7 @@ const TabNavigation = () => {
         component={Tarefa}
         options={{
           tabBarIcon: ({ color, size }) => (
-            <Ionicons name="add-circle-outline" size={size} color={color} />
+            <Ionicons name="add-circle" size={size} color={color} />
           ),
         }}
       />

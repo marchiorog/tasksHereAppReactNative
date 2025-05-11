@@ -10,9 +10,13 @@ import CustomInput from '../components/CustomInput';
 
 const { width, height } = Dimensions.get('window');
 
-type Props = StackScreenProps<RootStackParamList, 'Tarefa'>;
+type TarefaContaScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Tarefa'>;
 
-export default function Tarefa({ navigation, route}: Props) {
+type Props = {
+  navigation: TarefaContaScreenNavigationProp;
+};
+
+export default function Tarefa({ navigation}: Props) {
   const [lembretes, setLembretes] = useState<Lembrete[]>([]);
   const [titulo, setTitulo] = useState('');
   const [icone, setIcone] = useState('');
@@ -24,38 +28,9 @@ export default function Tarefa({ navigation, route}: Props) {
     '#E3F9FF', '#FFFCE3', '#E3FFF4',
   ];
   
-  useEffect(() => {
-    if (route.params?.lembrete) {
-      const { titulo, icone, cor, data } = route.params.lembrete;
-      setTitulo(titulo);
-      setIcone(icone);
-      setCor(cor);
-      setData(new Date(data));
-    }
-  }, [route.params?.lembrete]);
 
   const handleSave = async () => {
     try {
-      const lembrete = {
-        titulo, icone, cor, data: data.toISOString(), createdAt: new Date(),
-      };
-
-      const storedLembretes = await AsyncStorage.getItem('lembretes');
-      const lembretes = storedLembretes ? JSON.parse(storedLembretes) : [];
-
-      if (route.params?.lembrete) {
-        const updatedLembretes = lembretes.map((l: Lembrete) =>
-          l.titulo === route.params.lembrete?.titulo ? lembrete : l
-        );
-        await AsyncStorage.setItem('lembretes', JSON.stringify(updatedLembretes));
-      } else {
-        if (lembretes.length >= 5) {
-          Alert.alert('Limite atingido', 'Você só pode criar até 5 lembretes.');
-          return;
-        }
-        lembretes.push(lembrete);
-        await AsyncStorage.setItem('lembretes', JSON.stringify(lembretes));
-      }
 
       Alert.alert('Sucesso', 'Lembrete salvo com sucesso!');
       navigation.goBack();

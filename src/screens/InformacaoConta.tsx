@@ -77,18 +77,21 @@ export default function InformacaoConta({ navigation }: Props) {
             value={name} 
             onChangeText={setName} 
             placeholder="Seu nome" 
+            placeholderTextColor="#aaa"
           />
           <Text style={styles.titleSub}>Data de nascimento:</Text>
           <CustomInput 
             value={birthDate} 
             onChangeText={setBirthDate} 
             placeholder="Sua data de nascimento" 
+            placeholderTextColor="#aaa"
           />
           <Text style={styles.titleSub}>Telefone:</Text>
           <CustomInput 
             value={phone} 
             onChangeText={setPhone} 
             placeholder="Seu telefone" 
+            placeholderTextColor="#aaa"
             keyboardType="phone-pad" 
           />
 

@@ -70,12 +70,14 @@ export default function Cadastro({ navigation }: Props) {
             value={email}
             onChangeText={setEmail}
             placeholder="Email"
+            placeholderTextColor="#aaa"
             keyboardType="email-address"
           />
           <CustomInput
             value={password}
             onChangeText={setPassword}
             placeholder="Senha"
+            placeholderTextColor="#aaa"
             secureTextEntry
           />
           {isLoading ? (
@@ -137,7 +139,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   link: {
-    color: '#92AAC6',
+    color: '#68BAE8',
     fontWeight: 'bold',
   },
   footerContainer: {

@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity, Dimensions } from 'react-nati
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../components/Navigation';
+import { Ionicons } from '@expo/vector-icons';
 
 const { width, height } = Dimensions.get('window');
 
@@ -19,6 +20,7 @@ export default function Configuracao({ navigation }: Props) {
       <View style={styles.optionsContainer}>        
         <View style={styles.section}>
           <TouchableOpacity style={styles.option} onPress={() => navigation.navigate('EncerrarConta')}>
+            <Ionicons name="trash" size={24} color={""} />
             <Text style={styles.optionText}>Encerrar conta</Text>
           </TouchableOpacity>
         </View>

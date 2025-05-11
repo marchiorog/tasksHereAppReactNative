@@ -3,14 +3,13 @@ import { View, Text, StyleSheet, TouchableOpacity, Dimensions, Alert } from 'rea
 import { RadioButton, Provider as PaperProvider } from 'react-native-paper'; 
 import CustomButton from '../components/CustomButton'; 
 import { StackNavigationProp } from '@react-navigation/stack';
+import { RootStackParamList } from '../components/Navigation';
 import { getAuth, deleteUser } from 'firebase/auth'; 
 import { getFirestore, doc, deleteDoc } from 'firebase/firestore'; 
 
 const { width, height } = Dimensions.get('window');
 
-type EncerrarContaScreenNavigationProp = StackNavigationProp<{
-  Login: undefined;
-}>;
+type EncerrarContaScreenNavigationProp = StackNavigationProp<RootStackParamList, 'EncerrarConta'>;
 
 type Props = {
   navigation: EncerrarContaScreenNavigationProp;

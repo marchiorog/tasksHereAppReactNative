@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView, Dimensions
 //import Icon from 'react-native-vector-icons/MaterialIcons';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { useUserContext } from '../context/UserContext'; 
+import { Ionicons } from '@expo/vector-icons';
 
 type PerfilScreenNavigationProp = StackNavigationProp<{
   Configuracao: undefined;
@@ -39,16 +40,16 @@ export default function Perfil({ navigation }: Props) {
 
         <View style={styles.optionsContainer} >
           <TouchableOpacity style={styles.option} onPress={() => navigation.navigate('MeuPerfil')}>
-            
+            <Ionicons name="person-outline" size={24} color={""} />
             <Text style={styles.optionText}>Meu perfil</Text>
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.option} onPress={() => navigation.navigate('Configuracao')}>
-            
+            <Ionicons name="settings" size={24} color={""} />
             <Text style={styles.optionText}>Configurações</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.logoutOption} onPress={() => navigation.navigate('Login')}>
-            
+            <Ionicons name="exit-outline" size={24} color={""} />
             <Text style={styles.logoutText}>Sair</Text>
           </TouchableOpacity>
         </View>

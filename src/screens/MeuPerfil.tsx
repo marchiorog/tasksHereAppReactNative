@@ -99,6 +99,7 @@ export default function MeuPerfil({ navigation }: Props) {
           <CustomInput
             value={ ''}
             placeholder="Nome"
+            placeholderTextColor="#aaa"
             onChangeText={(name) => updateUserField('name', name)}
           />
 
@@ -106,12 +107,14 @@ export default function MeuPerfil({ navigation }: Props) {
           <CustomInput
             value={ ''}
             placeholder="Telefone"
+            placeholderTextColor="#aaa"
             onChangeText={(phone) => updateUserField('phone', phone)}
           />
           <Text style={styles.label}>Data de Nascimento</Text>
           <CustomInput
             value={ ''}
             placeholder="Data de nascimento"
+            placeholderTextColor="#aaa"
             onChangeText={(birthDate) => updateUserField('birthDate', birthDate)}
           />
         </View>
