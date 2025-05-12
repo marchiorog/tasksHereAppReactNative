@@ -62,28 +62,26 @@ export default function Home() {
   );
 
   return (
-    <ScrollView contentContainerStyle={styles.scrollContainer} showsVerticalScrollIndicator={false}>
-      <View style={styles.outerContainer}>
-        <View style={styles.container}>
-          <Text style={styles.title}>Home</Text>
-          <SearchBar
-            placeholder="Buscar"
-            value={search}
-            onChangeText={(text) => setSearch(text)}
-          />
-          <Text style={styles.subtitle}>Minhas tarefas</Text>
-          <FlatList
-            data={tarefas.filter((profissional) =>
-              profissional.titulo.toLowerCase().includes(search.toLowerCase())
-            )}
-            renderItem={renderItem}
-            keyExtractor={(item) => item.id}
-            showsVerticalScrollIndicator={false}
-            contentContainerStyle={{ paddingBottom: 80 }}
-          />
-        </View>
+    <View style={styles.outerContainer}>
+      <View style={styles.container}>
+        <Text style={styles.title}>Home</Text>
+        <SearchBar
+          placeholder="Buscar"
+          value={search}
+          onChangeText={(text) => setSearch(text)}
+        />
+        <Text style={styles.subtitle}>Minhas tarefas</Text>
+        <FlatList
+          data={tarefas.filter((profissional) =>
+            profissional.titulo.toLowerCase().includes(search.toLowerCase())
+          )}
+          renderItem={renderItem}
+          keyExtractor={(item) => item.id}
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={{ paddingBottom: 80 }}
+        />
       </View>
-    </ScrollView>
+    </View>
   );
 }
 
