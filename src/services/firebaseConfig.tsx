@@ -3,12 +3,12 @@ import { getAuth } from "firebase/auth";
 import { getFirestore, collection, addDoc } from 'firebase/firestore';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBZb9M_n7UXfUcLIAW09m0JDQGRzCjCny8",
-  authDomain: "did-i-forgot-app.firebaseapp.com",
-  projectId: "did-i-forgot-app",
-  storageBucket: "did-i-forgot-app.firebasestorage.app",
-  messagingSenderId: "1061811257129",
-  appId: "1:1061811257129:web:1ccc1a89c3987501290138"
+  apiKey: "AIzaSyBRVTbgYlc0opeut8x3tQIGyCF7cUI0JsE",
+  authDomain: "tasksherereact.firebaseapp.com",
+  projectId: "tasksherereact",
+  storageBucket: "tasksherereact.firebasestorage.app",
+  messagingSenderId: "386802466299",
+  appId: "1:386802466299:web:bfcbb2856e95b7524f9f5e"
 };
 
 const app = initializeApp(firebaseConfig);
