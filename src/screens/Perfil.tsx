@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Dimensions } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { getAuth, onAuthStateChanged, signOut, User } from 'firebase/auth';
-import { auth } from '../services/firebaseConfig'; // Importe a configuração do Firebase
+import { auth, db } from '../services/firebaseConfig';
 import { StackNavigationProp } from '@react-navigation/stack';
+import { getFirestore, doc, getDoc, updateDoc } from 'firebase/firestore';
 
 type PerfilScreenNavigationProp = StackNavigationProp<{
   Configuracao: undefined;
@@ -18,14 +19,23 @@ type Props = {
 const { width, height } = Dimensions.get('window');
 
 export default function Perfil({ navigation }: Props) {
-const [user, setUser] = useState<User | null>(null); 
+  const [user, setUser] = useState<User | null>(null);
+  const [nome, setNome] = useState('');
+  const [email, setEmail] = useState('');
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
-        setUser(user); 
+        setUser(user);
+        const userDocRef = doc(db, 'users', user.uid);
+        const docSnap = await getDoc(userDocRef);
+        if (docSnap.exists()) {
+          const userData = docSnap.data();
+          setNome(userData.name || '');
+          setEmail(userData.email || '');
+        }
       } else {
-        setUser(null); 
+        setUser(null);
       }
     });
 
@@ -34,7 +44,7 @@ const [user, setUser] = useState<User | null>(null);
 
   const handleLogout = () => {
     signOut(auth).then(() => {
-      navigation.navigate('Login'); 
+      navigation.navigate('Login');
     }).catch((error) => {
       console.error('Erro ao fazer logout: ', error);
     });
@@ -48,8 +58,8 @@ const [user, setUser] = useState<User | null>(null);
         {user ? (
           <View style={styles.profileContainer}>
             <View style={styles.userInfo}>
-              <Text style={styles.userName}>{user.displayName || 'Usuário'}</Text>
-              <Text style={styles.userEmail}>{user.email}</Text>
+              <Text style={styles.userName}>{nome || 'Usuário'}</Text>
+              <Text style={styles.userEmail}>{email}</Text>
             </View>
           </View>
         ) : (

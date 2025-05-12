@@ -141,7 +141,7 @@ const styles = StyleSheet.create({
   },
   cardTime: {
     fontSize: 14,
-    color: '#f0f0f0',
+    color: '#000',
   },
   cardIcon: {
     width: 40,
