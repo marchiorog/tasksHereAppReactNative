@@ -5,7 +5,8 @@ import CustomButton from '../components/CustomButton';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../components/Navigation';
 import { getAuth, deleteUser } from 'firebase/auth'; 
-import { getFirestore, doc, deleteDoc } from 'firebase/firestore'; 
+import { doc, deleteDoc } from 'firebase/firestore'; 
+import { db } from '../services/firebaseConfig';
 
 const { width, height } = Dimensions.get('window');
 
@@ -17,8 +18,6 @@ type Props = {
 
 export default function EncerrarConta({ navigation }: Props) {
   const [checked, setChecked] = useState(''); 
-  //const auth = getAuth();
-  //const firestore = getFirestore();
 
   const theme = {
     colors: {
@@ -27,17 +26,17 @@ export default function EncerrarConta({ navigation }: Props) {
   };
 
   const handleEncerrarConta = async () => {
-     {/* 
+
     if (!checked) {
       Alert.alert('Erro', 'Selecione um motivo para encerrar a conta.');
       return;
     }
 
     try {
-      const user = auth.currentUser;
+      const user = getAuth().currentUser;
 
       if (user) {
-        const userDocRef = doc(firestore, 'users', user.uid);
+        const userDocRef = doc(db, 'users', user.uid);
         await deleteDoc(userDocRef);
 
         await deleteUser(user);
@@ -50,8 +49,6 @@ export default function EncerrarConta({ navigation }: Props) {
     } catch (error: any) {
       Alert.alert('Erro', 'Não foi possível encerrar a conta. Tente novamente.');
     }
-    */}
-
     navigation.navigate('EncerramentoConta'); 
   };
 

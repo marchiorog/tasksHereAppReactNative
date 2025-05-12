@@ -1,57 +1,67 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback  } from 'react';
+import { useFocusEffect } from '@react-navigation/native';
 import {
   View,
   Text,
   StyleSheet,
-  TextInput,
   FlatList,
   Dimensions,
   TouchableOpacity,
-  ScrollView
+  Alert,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import SearchBar from '../components/SearchBar';
+import { db, collection, getDocs } from '../services/firebaseConfig'; 
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RootStackParamList } from '../components/Navigation';
+import { getAuth } from "firebase/auth";
+import { query, where } from '../services/firebaseConfig'; 
 
 const { width, height } = Dimensions.get('window');
 
-const tarefas = [
-  {
-    id: '1',
-    titulo: 'Mercado',
-    horario: '10:00 - 11:00',
-    cor: '#8DA8C8',
-    icon: '🛒',
-  },
-  {
-    id: '2',
-    titulo: 'Estudar',
-    horario: '13:00 - 14:00',
-    cor: '#A3B28D',
-    icon: '📚',
-  },
-  {
-    id: '3',
-    titulo: 'Consulta',
-    horario: '15:00 - 16:00',
-    cor: '#FCA9F1',
-    icon: '📅',
-  },
-  {
-    id: '4',
-    titulo: 'Aniversário',
-    horario: '19:00 - 21:00',
-    cor: '#F57F7F',
-    icon: '🎁',
-  },
-];
+type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Home'>;
 
-export default function Home() {
+type Props = {
+  navigation: HomeScreenNavigationProp;
+};
+
+export default function Home({ navigation }: Props) {
   const [search, setSearch] = useState('');
+  const [tarefas, setTarefas] = useState<any[]>([]);
+
+  useFocusEffect(
+    useCallback(() => {
+      const fetchTarefas = async () => {
+        try {
+          const user = getAuth().currentUser;
+
+          if (!user) {
+            Alert.alert('Erro', 'Usuário não autenticado.');
+            return;
+          }
+
+          const tarefasRef = collection(db, 'tarefas');
+          const q = query(tarefasRef, where('userId', '==', user.uid));
+          const tarefasSnapshot = await getDocs(q);
+          const tarefasList = tarefasSnapshot.docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+          }));
+          setTarefas(tarefasList);
+        } catch (error) {
+          Alert.alert('Erro', 'Não foi possível carregar as tarefas.');
+          console.error(error);
+        }
+      };
+
+      fetchTarefas();
+    }, [])
+  );
 
   const renderItem = ({ item }: any) => (
     <TouchableOpacity style={[styles.card, { backgroundColor: item.cor }]}>
       <View style={styles.cardIcon}>
-        <Text style={styles.icon}>{item.icon}</Text>
+        <Text style={styles.icon}>{item.icone}</Text>
       </View>
       <View style={styles.cardText}>
         <Text style={styles.cardTitle}>{item.titulo}</Text>
@@ -72,8 +82,8 @@ export default function Home() {
         />
         <Text style={styles.subtitle}>Minhas tarefas</Text>
         <FlatList
-          data={tarefas.filter((profissional) =>
-            profissional.titulo.toLowerCase().includes(search.toLowerCase())
+          data={tarefas.filter((tarefa) =>
+            tarefa.titulo.toLowerCase().includes(search.toLowerCase())
           )}
           renderItem={renderItem}
           keyExtractor={(item) => item.id}
@@ -86,9 +96,6 @@ export default function Home() {
 }
 
 const styles = StyleSheet.create({
-  scrollContainer: {
-    flexGrow: 1,
-  },
   outerContainer: {
     flex: 1,
     backgroundColor: '#fff',
@@ -103,22 +110,14 @@ const styles = StyleSheet.create({
   title: {
     fontSize: width * 0.05,
     fontWeight: 'bold',
-    marginBottom: height * 0.04, 
+    marginBottom: height * 0.04,
     textAlign: 'center',
-  },
-  search: {
-    backgroundColor: '#F5F5F5',
-    borderRadius: 8,
-    height: 45,
-    paddingHorizontal: 15,
-    marginBottom: 20,
-    fontSize: 16,
   },
   subtitle: {
     fontSize: width * 0.05,
     fontWeight: 'bold',
-    marginBottom: height * 0.03, 
-    marginTop: height * 0.02, 
+    marginBottom: height * 0.03,
+    marginTop: height * 0.02,
   },
   card: {
     flexDirection: 'row',
@@ -138,11 +137,11 @@ const styles = StyleSheet.create({
   cardTitle: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: '#fff',
+    color: '#000',
   },
   cardTime: {
     fontSize: 14,
-    color: '#f0f0f0',
+    color: '#000',
   },
   cardIcon: {
     width: 40,
@@ -152,5 +151,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: 16,
+  },
+  addButton: {
+    position: 'absolute',
+    bottom: 30,
+    right: 30,
   },
 });
