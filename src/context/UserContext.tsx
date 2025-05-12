@@ -6,9 +6,6 @@ type UserData = {
   name?: string;
   phone?: string;
   birthDate?: string;
-  gender?: string;
-  role?: string; 
-  profileImage?: string;
 };
 
 // Define os métodos disponíveis no contexto

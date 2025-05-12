@@ -18,6 +18,7 @@ type Props = {
 };
 
 export default function Login({ navigation }: Props) {
+  const { setUserData } = useUserContext();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -29,7 +30,23 @@ export default function Login({ navigation }: Props) {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
 
-       navigation.navigate('Main');
+      const userDoc = await getDoc(doc(db, `users/${user.uid}`));
+  
+      if (userDoc.exists()) {
+        const userData = userDoc.data();
+
+        setUserData({
+          uid: user.uid,
+          email: user.email || '',
+          name: userData.name || '',
+          phone: userData.phone || '',
+          birthDate: userData.birthDate || '',
+        });
+  
+        navigation.navigate('Main');
+      } else {
+        console.error('Documento não encontrado no Firestore.');
+      }
 
     } catch (error) {
       Alert.alert('Erro ao fazer login', 'Verifique suas credenciais e tente novamente.');

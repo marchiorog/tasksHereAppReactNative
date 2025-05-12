@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, Image, TouchableOpacity, Dimensions, ScrollView
 import CustomButton from '../components/CustomButton';
 import CustomInput from '../components/CustomInput';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { useUserContext } from '../context/UserContext';
+import { useUserContext } from '../context/UserContext'; 
 import { auth } from '../services/firebaseConfig';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 
@@ -20,13 +20,12 @@ type Props = {
 };
 
 export default function Cadastro({ navigation }: Props) {
-  //const { setUserData } = useUserContext();
+  const { setUserData } = useUserContext();
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const handleCadastro = async () => {
-    {/*
     if (!email || !password) {
       Alert.alert('Erro', 'Por favor, preencha todos os campos.');
       return;
@@ -51,9 +50,6 @@ export default function Cadastro({ navigation }: Props) {
     } finally {
       setIsLoading(false);
     }
-      */}
-
-      navigation.navigate('InformacaoConta');
   };
 
   return (
@@ -81,7 +77,7 @@ export default function Cadastro({ navigation }: Props) {
             secureTextEntry
           />
           {isLoading ? (
-            <ActivityIndicator size="large" color="#ACBC89" />
+            <ActivityIndicator size="large" color="#68BAE8" />
           ) : (
             <CustomButton title="Cadastrar" onPress={handleCadastro} />
           )}
