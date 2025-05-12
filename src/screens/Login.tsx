@@ -23,41 +23,19 @@ export default function Login({ navigation }: Props) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const handleLogin = async () => {
-    {/*
     try {
       setIsLoading(true);
 
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
 
-      const userDoc = await getDoc(doc(db, `users/${user.uid}`));
+       navigation.navigate('Main');
 
-      if (userDoc.exists()) {
-        const userData = userDoc.data();
-
-        setUserData({
-          uid: user.uid,
-          email: user.email || '',
-          name: userData.name || '',
-          phone: userData.phone || '',
-          birthDate: userData.birthDate || '',
-          gender: userData.gender || '',
-          role: userData.role || '',
-          profileImage: userData.profileImage || '',
-        });
-  
-        navigation.navigate('Main');
-      } else {
-        console.error('Documento não encontrado no Firestore.');
-      }
     } catch (error) {
       Alert.alert('Erro ao fazer login', 'Verifique suas credenciais e tente novamente.');
     } finally {
       setIsLoading(false);
     }
-      */}
-
-      navigation.navigate('Main');
   };
   
   return (
@@ -86,7 +64,7 @@ export default function Login({ navigation }: Props) {
           />
 
           {isLoading ? (
-            <ActivityIndicator size="large" color="#ACBC89" />
+            <ActivityIndicator size="large" color="#68BAE8" />
           ) : (
             <CustomButton title="Entrar" onPress={handleLogin} />
           )}
