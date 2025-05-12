@@ -1,4 +1,4 @@
-import React, { useState, useCallback  } from 'react';
+import React, { useState, useCallback } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
 import {
   View,
@@ -11,11 +11,13 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import SearchBar from '../components/SearchBar';
-import { db, collection, getDocs } from '../services/firebaseConfig'; 
+import { db, collection, getDocs } from '../services/firebaseConfig';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../components/Navigation';
 import { getAuth } from "firebase/auth";
-import { query, where } from '../services/firebaseConfig'; 
+import { query, where } from '../services/firebaseConfig';
+import { deleteDoc, doc } from 'firebase/firestore';
+
 
 const { width, height } = Dimensions.get('window');
 
@@ -58,6 +60,18 @@ export default function Home({ navigation }: Props) {
     }, [])
   );
 
+  const handleDelete = async (id: string) => {
+    try {
+      await deleteDoc(doc(db, 'tarefas', id));
+      setTarefas((prev) => prev.filter((tarefa) => tarefa.id !== id));
+      Alert.alert('Sucesso', 'Tarefa concluída com sucesso!');
+    } catch (error) {
+      Alert.alert('Erro', 'Não foi possível excluir a tarefa.');
+      console.error(error);
+    }
+  };
+
+
   const renderItem = ({ item }: any) => (
     <TouchableOpacity style={[styles.card, { backgroundColor: item.cor }]}>
       <View style={styles.cardIcon}>
@@ -67,7 +81,9 @@ export default function Home({ navigation }: Props) {
         <Text style={styles.cardTitle}>{item.titulo}</Text>
         <Text style={styles.cardTime}>{item.horario}</Text>
       </View>
-      <Ionicons name="checkmark-circle" size={28} color="green" />
+      <TouchableOpacity onPress={() => handleDelete(item.id)}>
+        <Ionicons name="checkmark-circle" size={28} color="green" />
+      </TouchableOpacity>
     </TouchableOpacity>
   );
 
