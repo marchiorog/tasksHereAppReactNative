@@ -12,7 +12,7 @@ import EncerramentoConta from '../screens/EncerramentoConta';
 import InformacaoConta from '../screens/InformacaoConta';
 import TabNavigation from './TabNavigation';
 import Home from '../screens/Home';
-import Tarefa from '../screens/Tarefa';
+import AdicionarTarefa from '../screens/AdicionarTarefa';
 import { Lembrete } from '.././types/types';
 
 export type RootStackParamList = {
@@ -26,7 +26,7 @@ export type RootStackParamList = {
   InformacaoConta: undefined;
   Main: undefined; 
   Home: undefined; 
-  Tarefa: undefined; 
+  AdicionarTarefa: undefined;
 };
 
 const Stack = createStackNavigator<RootStackParamList>();
