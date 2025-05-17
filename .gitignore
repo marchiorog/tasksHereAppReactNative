@@ -36,5 +36,5 @@ yarn-error.*
 # typescript
 *.tsbuildinfo
 
-# Firebase
-firebaseConfig.tsx
+# Arquivos sensíveis
+.env
