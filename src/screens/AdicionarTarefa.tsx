@@ -5,7 +5,7 @@ import { RootStackParamList } from '../components/Navigation';
 import CustomButton from '../components/CustomButton';
 import CustomInput from '../components/CustomInput';
 import { db } from '../services/firebaseConfig'; 
-import { collection, addDoc, getDocs } from 'firebase/firestore';
+import { collection, addDoc } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
 
 const { width, height } = Dimensions.get('window');
@@ -36,7 +36,6 @@ export default function AdicionarTarefa({ navigation }: Props) {
         return;
       }
 
-      // Adiciona a tarefa no Firestore
       await addDoc(collection(db, "tarefas"), {
         titulo: titulo,
         icone: icone,
@@ -45,7 +44,6 @@ export default function AdicionarTarefa({ navigation }: Props) {
         userId: user.uid,
       });
 
-      // Reseta os campos
       setTitulo('');
       setIcone('');
       setCor('#ffffff');

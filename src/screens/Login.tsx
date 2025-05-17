@@ -51,7 +51,7 @@ export default function Login({ navigation }: Props) {
           birthDate: userData.birthDate || '',
         });
 
-        navigation.navigate('Main');
+        navigation.navigate('Home');
       } else {
         console.error('Documento não encontrado no Firestore.');
       }
