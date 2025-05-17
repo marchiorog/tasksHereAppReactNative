@@ -14,10 +14,9 @@ import SearchBar from '../components/SearchBar';
 import { db, collection, getDocs } from '../services/firebaseConfig';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../components/Navigation';
-import { getAuth } from "firebase/auth";
-import { query, where } from '../services/firebaseConfig';
+import { getAuth, signOut } from "firebase/auth";
+import { auth, query, where } from '../services/firebaseConfig';
 import { deleteDoc, doc } from 'firebase/firestore';
-
 
 const { width, height } = Dimensions.get('window');
 
@@ -71,6 +70,14 @@ export default function Home({ navigation }: Props) {
     }
   };
 
+  const handleLogout = () => {
+    signOut(auth).then(() => {
+      navigation.navigate('Login');
+    }).catch((error) => {
+      console.error('Erro ao fazer logout: ', error);
+    });
+  };
+
 
   const renderItem = ({ item }: any) => (
     <TouchableOpacity style={[styles.card, { backgroundColor: item.cor }]}>
@@ -90,7 +97,12 @@ export default function Home({ navigation }: Props) {
   return (
     <View style={styles.outerContainer}>
       <View style={styles.container}>
-        <Text style={styles.title}>Home</Text>
+        <View style={styles.header}>
+          <Text style={styles.title}>Home</Text>
+          <TouchableOpacity onPress={handleLogout}>
+            <Ionicons name="exit-outline" size={24} color="black" />
+          </TouchableOpacity>
+        </View>
         <SearchBar
           placeholder="Buscar"
           value={search}
@@ -126,8 +138,14 @@ const styles = StyleSheet.create({
   title: {
     fontSize: width * 0.05,
     fontWeight: 'bold',
-    marginBottom: height * 0.04,
+    marginBottom: height * 0.07,
     textAlign: 'center',
+    paddingLeft: height * 0.03,
+    flex: 1,
+  },
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   subtitle: {
     fontSize: width * 0.05,
