@@ -122,7 +122,6 @@ export default function Home({ navigation }: Props) {
           contentContainerStyle={{ paddingBottom: 80 }}
         />
 
-        {/* Botão Flutuante */}
         <TouchableOpacity
           style={styles.fab}
           onPress={() => navigation.navigate('AdicionarTarefa')}

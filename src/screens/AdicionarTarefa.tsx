@@ -20,7 +20,7 @@ export default function AdicionarTarefa({ navigation }: Props) {
   const [titulo, setTitulo] = useState('');
   const [icone, setIcone] = useState('');
   const [cor, setCor] = useState('#ffffff');
-  const [data, setData] = useState(new Date());
+  const [data, setData] = useState('');
 
   const predefinedColors = [
     '#FFF4E3', '#E3FFE3', '#F9E6FF', 
@@ -40,14 +40,14 @@ export default function AdicionarTarefa({ navigation }: Props) {
         titulo: titulo,
         icone: icone,
         cor: cor,
-        horario: data.toLocaleTimeString(),
+        horario: data,
         userId: user.uid,
       });
 
       setTitulo('');
       setIcone('');
       setCor('#ffffff');
-      setData(new Date());
+      setData('');
 
       Alert.alert('Sucesso', 'Lembrete salvo com sucesso!');
       navigation.goBack();
@@ -80,9 +80,9 @@ export default function AdicionarTarefa({ navigation }: Props) {
 
           <Text style={styles.label}>Horário:</Text>
           <CustomInput 
-            value={data.toLocaleTimeString()}
-            onChangeText={(text) => setData(new Date(`2023-01-01T${text}:00`))}
-            placeholder="Digite o horário"
+            value={data}
+            onChangeText={setData}
+            placeholder="Digite um horário"
             placeholderTextColor="#aaa"
             keyboardType="default"
           />
