@@ -103,12 +103,15 @@ export default function Home({ navigation }: Props) {
             <Ionicons name="exit-outline" size={24} color="black" />
           </TouchableOpacity>
         </View>
+
         <SearchBar
           placeholder="Buscar"
           value={search}
           onChangeText={(text) => setSearch(text)}
         />
+
         <Text style={styles.subtitle}>Minhas tarefas</Text>
+
         <FlatList
           data={tarefas.filter((tarefa) =>
             tarefa.titulo.toLowerCase().includes(search.toLowerCase())
@@ -118,9 +121,18 @@ export default function Home({ navigation }: Props) {
           showsVerticalScrollIndicator={false}
           contentContainerStyle={{ paddingBottom: 80 }}
         />
+
+        {/* Botão Flutuante */}
+        <TouchableOpacity
+          style={styles.fab}
+          onPress={() => navigation.navigate('AdicionarTarefa')}
+        >
+          <Ionicons name="add" size={28} color="#fff" />
+        </TouchableOpacity>
       </View>
     </View>
   );
+
 }
 
 const styles = StyleSheet.create({
@@ -190,5 +202,21 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 30,
     right: 30,
+  },
+  fab: {
+    position: 'absolute',
+    bottom: 24,
+    right: 0,
+    backgroundColor: '#00668B',
+    width: 56,
+    height: 56,
+    borderRadius: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    elevation: 5,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 3,
   },
 });

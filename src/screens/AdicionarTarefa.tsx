@@ -61,8 +61,6 @@ export default function AdicionarTarefa({ navigation }: Props) {
     <ScrollView contentContainerStyle={styles.scrollContainer} showsVerticalScrollIndicator={false}>
       <View style={styles.outerContainer}>
         <View style={styles.container}>
-          <Text style={styles.title}>Adicionar tarefa</Text> 
-
           <Text style={styles.label}>Nome:</Text>
           <CustomInput 
             value={titulo} 
@@ -120,7 +118,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'flex-start',
     backgroundColor: '#fff',
-    marginTop: height * 0.07,
+    marginTop: height * 0.04,
   },
   title: {
     fontSize: width * 0.05,

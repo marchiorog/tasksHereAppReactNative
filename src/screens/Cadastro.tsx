@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, Image, TouchableOpacity, Dimensions, ScrollView
 import CustomButton from '../components/CustomButton';
 import CustomInput from '../components/CustomInput';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { useUserContext } from '../context/UserContext'; 
+import { useUserContext } from '../context/UserContext';
 import { auth } from '../services/firebaseConfig';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 
@@ -37,31 +37,37 @@ export default function Cadastro({ navigation }: Props) {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const userId = userCredential.user.uid;
 
-      setUserData((prevData) => ({
-        ...prevData,
-        uid: userId,
-        email,
-      }));
-
-      navigation.navigate('InformacaoConta');
+      Alert.alert('Sucesso', 'Conta criada com sucesso!');
+      navigation.navigate('Login');
     } catch (error: any) {
+      let message = 'Não foi possível criar a conta. Tente novamente.';
+
+      if (error.code === 'auth/email-already-in-use') {
+        message = 'Este e-mail já está em uso.';
+      } else if (error.code === 'auth/invalid-email') {
+        message = 'E-mail inválido.';
+      } else if (error.code === 'auth/weak-password') {
+        message = 'A senha precisa ter pelo menos 6 caracteres.';
+      }
+
       console.error('Erro ao criar conta:', error.message);
-      Alert.alert('Erro', 'Não foi possível criar a conta. Tente novamente.');
+      Alert.alert('Erro', message);
     } finally {
       setIsLoading(false);
     }
   };
 
+
   return (
     <ScrollView contentContainerStyle={styles.scrollContainer}>
       <View style={styles.outerContainer}>
         <View style={styles.container}>
-            <Image
-              source={require('../../assets/logo.png')}
-              style={styles.logo}
-              resizeMode="contain"
-            />
-          <Text style={styles.subtitle}>Crie uma conta</Text>  
+          <Image
+            source={require('../../assets/logo.png')}
+            style={styles.logo}
+            resizeMode="contain"
+          />
+          <Text style={styles.subtitle}>Crie uma conta</Text>
           <CustomInput
             value={email}
             onChangeText={setEmail}
@@ -100,29 +106,29 @@ const styles = StyleSheet.create({
   outerContainer: {
     flex: 1,
     backgroundColor: '#fff',
-    paddingHorizontal: width * 0.1, 
+    paddingHorizontal: width * 0.1,
   },
   container: {
     flex: 1,
     justifyContent: 'flex-start',
     paddingTop: height * 0.1,
     backgroundColor: '#fff',
-    alignItems: 'center', 
+    alignItems: 'center',
   },
   logo: {
-    width: width * 1,  
+    width: width * 1,
     height: height * 0.3
   },
   title: {
-    color:'#ACBC89',
-    fontSize: width * 0.06, 
+    color: '#ACBC89',
+    fontSize: width * 0.06,
     fontWeight: 'bold',
     marginBottom: 10,
     textAlign: 'center',
   },
   subtitle: {
     color: '#000',
-    fontSize: width * 0.04, 
+    fontSize: width * 0.04,
     fontWeight: 'bold',
     marginBottom: 28,
     width: '100%',
@@ -131,7 +137,7 @@ const styles = StyleSheet.create({
   registerText: {
     marginTop: 20,
     color: '#858585',
-    fontSize: width * 0.04, 
+    fontSize: width * 0.04,
     textAlign: 'center',
   },
   link: {
@@ -139,7 +145,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   footerContainer: {
-    marginTop: height * 0.15, 
+    marginTop: height * 0.15,
   },
   linkSobre: {
     color: '#ACBC89',
@@ -149,7 +155,7 @@ const styles = StyleSheet.create({
   nomeText: {
     marginTop: 20,
     color: '#858585',
-    fontSize: width * 0.04, 
+    fontSize: width * 0.04,
     textAlign: 'center',
   },
 });

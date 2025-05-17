@@ -32,29 +32,18 @@ export default function Login({ navigation }: Props) {
   );
 
   const handleLogin = async () => {
+    if (!email || !password) {
+      Alert.alert('Erro', 'Por favor, preencha todos os campos.');
+      return;
+    }
+
     try {
       setIsLoading(true);
 
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
 
-      const userDoc = await getDoc(doc(db, `users/${user.uid}`));
-
-      if (userDoc.exists()) {
-        const userData = userDoc.data();
-
-        setUserData({
-          uid: user.uid,
-          email: user.email || '',
-          name: userData.name || '',
-          phone: userData.phone || '',
-          birthDate: userData.birthDate || '',
-        });
-
-        navigation.navigate('Home');
-      } else {
-        console.error('Documento não encontrado no Firestore.');
-      }
+      navigation.navigate('Home');
 
     } catch (error) {
       Alert.alert('Erro ao fazer login', 'Verifique suas credenciais e tente novamente.');
