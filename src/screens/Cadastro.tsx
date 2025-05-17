@@ -3,24 +3,19 @@ import { View, Text, StyleSheet, Image, TouchableOpacity, Dimensions, ScrollView
 import CustomButton from '../components/CustomButton';
 import CustomInput from '../components/CustomInput';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { useUserContext } from '../context/UserContext';
+import { RootStackParamList } from '../components/Navigation';
 import { auth } from '../services/firebaseConfig';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 
 const { width, height } = Dimensions.get('window');
 
-type CadastroScreenNavigationProp = StackNavigationProp<{
-  Login: undefined;
-  Cadastro: undefined;
-  InformacaoConta: undefined;
-}>;
+type CadastroScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Cadastro'>;
 
 type Props = {
   navigation: CadastroScreenNavigationProp;
 };
 
 export default function Cadastro({ navigation }: Props) {
-  const { setUserData } = useUserContext();
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -57,7 +52,6 @@ export default function Cadastro({ navigation }: Props) {
     }
   };
 
-
   return (
     <ScrollView contentContainerStyle={styles.scrollContainer}>
       <View style={styles.outerContainer}>
@@ -90,7 +84,7 @@ export default function Cadastro({ navigation }: Props) {
 
           <TouchableOpacity onPress={() => navigation.navigate('Login')}>
             <Text style={styles.registerText}>
-              Já tem uma conta? <Text style={styles.link}>Faça login</Text>
+              Já tem uma conta? <Text style={styles.link}>Faça o login</Text>
             </Text>
           </TouchableOpacity>
         </View>
