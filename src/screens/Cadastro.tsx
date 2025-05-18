@@ -79,7 +79,7 @@ export default function Cadastro({ navigation }: Props) {
           {isLoading ? (
             <ActivityIndicator size="large" color="#68BAE8" />
           ) : (
-            <CustomButton title="Cadastrar" onPress={handleCadastro} />
+            <CustomButton title="Criar" onPress={handleCadastro} />
           )}
 
           <TouchableOpacity onPress={() => navigation.navigate('Login')}>
