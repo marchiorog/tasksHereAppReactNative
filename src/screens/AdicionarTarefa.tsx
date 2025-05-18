@@ -129,7 +129,7 @@ const styles = StyleSheet.create({
   label: {
     fontSize: width * 0.04,
     marginBottom: height * 0.01,
-    color: '#555',
+    fontWeight: 'bold',
   },
   colorPalette: {
     flexDirection: 'row',

@@ -82,7 +82,7 @@ export default function Login({ navigation }: Props) {
 
           <TouchableOpacity onPress={() => navigation.navigate('Cadastro')}>
             <Text style={styles.registerText}>
-              Não tem conta? <Text style={styles.link}>Cadastre</Text>
+              Não tem conta? <Text style={styles.link}>Faça o cadastro</Text>
             </Text>
           </TouchableOpacity>
         </View>
