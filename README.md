@@ -13,20 +13,6 @@ To-do-List simples construído em React Native para análise comparativa de abor
   
 ---
 
-## 📁 Estrutura do Projeto
-
-```
-projeto_fashion_mnist_api/
-├── app.py                         # API Flask principal
-├── fashion_mnist_cnn_model.keras # Modelo treinado (formato .keras)
-├── requirements.txt              # Dependências do projeto
-├── .gitignore                    # Ignora o venv e arquivos desnecessários
-└── README.md                     # Este arquivo
-```
-
-
----
-
 ## 📦 Instalação
 
 ```bash
