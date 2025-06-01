@@ -56,3 +56,11 @@ yarn install
 npx expo start
 # ou, caso não use expo
 npx react-native run-android
+
+```
+
+## 📲 Telas
+
+![Imagem2](https://github.com/user-attachments/assets/8f57d659-da56-4b33-9f5b-e2e149b1f4d4)
+
+
