@@ -1,6 +1,6 @@
-# 📱 TasksHere - to do list 
+# 📱 TasksHere - To-Do list 
 
-To-do-List simples construído em React Native para análise comparativa de abordagens de desenvolvimento Mobile | TCC Engenharia de Computação.
+To-Do List simples construído em React Native para análise comparativa de abordagens de desenvolvimento Mobile | PFC I - Engenharia de Computação.
 
 ---
 
