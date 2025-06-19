@@ -61,6 +61,6 @@ npx react-native run-android
 
 ## 📲 Telas
 
-![Imagem2](https://github.com/user-attachments/assets/8f57d659-da56-4b33-9f5b-e2e149b1f4d4)
+![image5](https://github.com/user-attachments/assets/6243672f-eacc-473d-8833-dcad2871644b)
 
 
