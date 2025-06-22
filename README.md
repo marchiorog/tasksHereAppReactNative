@@ -43,10 +43,10 @@ tasksHereAppReactNative/
 
 ```bash
 # Clone o repositório
-git clone https://github.com/marchiorog/lembreMed.git
+git clone https://github.com/marchiorog/tasksHereAppReactNative.git
 
 # Acesse o diretório do projeto
-cd lembreMed
+cd tasksHereAppReactNative
 
 # Instale as dependências
 npm install
