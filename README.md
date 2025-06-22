@@ -6,11 +6,11 @@ To-Do List simples construído em React Native para análise comparativa de abor
 
 ## 🚀 Tecnologias
 
-- [Node.js](https://nodejs.org/) - v18.17.1  
-- [React Native](https://reactnative.dev/) - v0.72.4  
-- [Expo](https://expo.dev/) - v49.0.13  
-- [TypeScript](https://www.typescriptlang.org/) - v5.2  
-- [Firebase](https://firebase.google.com/) - v10.3.1
+- [Node.js](https://nodejs.org/) - v20.17.0
+- [React Native](https://reactnative.dev/) - v0.74.5
+- [Expo](https://expo.dev/) - v51.0.28  
+- [TypeScript](https://www.typescriptlang.org/) - v5.1.3  
+- [Firebase](https://firebase.google.com/) - v10.14.1
   
 ---
 
