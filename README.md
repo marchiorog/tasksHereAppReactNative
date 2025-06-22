@@ -24,7 +24,6 @@ tasksHereAppReactNative/
 │   ├── context/          # Contextos React para gerenciamento de estado global
 │   ├── screens/          # Telas (páginas) da aplicação
 │   ├── services/         # Serviços de comunicação com APIs e regras de negócio
-│   ├── types/            # Tipos e interfaces TypeScript
 ├── .env.example          # Exemplo de variáveis de ambiente  
 ├── .gitignore            # Arquivos/pastas ignorados pelo Git  
 ├── App.tsx               # Componente raiz da aplicação  
